@@ -1,0 +1,109 @@
+
+helloworld:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <main>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	83 e4 f0             	and    $0xfffffff0,%esp
+   6:	83 ec 10             	sub    $0x10,%esp
+   9:	c7 05 00 00 00 00 05 	movl   $0x5,0x0
+  10:	00 00 00 
+  13:	c7 05 00 00 00 00 06 	movl   $0x6,0x0
+  1a:	00 00 00 
+  1d:	c7 04 24 00 00 00 00 	movl   $0x0,(%esp)
+  24:	e8 fc ff ff ff       	call   25 <main+0x25>
+  29:	b8 00 00 00 00       	mov    $0x0,%eax
+  2e:	c9                   	leave  
+  2f:	c3                   	ret    
+
+Disassembly of section .bss:
+
+00000000 <xinu_in_mem>:
+   0:	00 00                	add    %al,(%eax)
+	...
+
+00000004 <load_xinu>:
+   4:	00 00                	add    %al,(%eax)
+	...
+
+00000008 <free_libraries>:
+   8:	00 00                	add    %al,(%eax)
+	...
+
+0000000c <sem_counter>:
+	...
+
+00000020 <libraries>:
+	...
+
+00000d94 <trial>:
+ d94:	00 00                	add    %al,(%eax)
+	...
+
+Disassembly of section .rodata:
+
+00000000 <.rodata>:
+   0:	48                   	dec    %eax
+   1:	65                   	gs
+   2:	6c                   	insb   (%dx),%es:(%edi)
+   3:	6c                   	insb   (%dx),%es:(%edi)
+   4:	6f                   	outsl  %ds:(%esi),(%dx)
+   5:	20 57 6f             	and    %dl,0x6f(%edi)
+   8:	72 6c                	jb     76 <libraries+0x56>
+   a:	64 21 20             	and    %esp,%fs:(%eax)
+   d:	25                   	.byte 0x25
+   e:	64 0a 00             	or     %fs:(%eax),%al
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	00 47 43             	add    %al,0x43(%edi)
+   3:	43                   	inc    %ebx
+   4:	3a 20                	cmp    (%eax),%ah
+   6:	28 47 65             	sub    %al,0x65(%edi)
+   9:	6e                   	outsb  %ds:(%esi),(%dx)
+   a:	74 6f                	je     7b <libraries+0x5b>
+   c:	6f                   	outsl  %ds:(%esi),(%dx)
+   d:	20 34 2e             	and    %dh,(%esi,%ebp,1)
+  10:	37                   	aaa    
+  11:	2e 33 2d 72 31 20 70 	xor    %cs:0x70203172,%ebp
+  18:	31 2e                	xor    %ebp,(%esi)
+  1a:	34 2c                	xor    $0x2c,%al
+  1c:	20 70 69             	and    %dh,0x69(%eax)
+  1f:	65                   	gs
+  20:	2d 30 2e 35 2e       	sub    $0x2e352e30,%eax
+  25:	35 29 20 34 2e       	xor    $0x2e342029,%eax
+  2a:	37                   	aaa    
+  2b:	2e 33 00             	xor    %cs:(%eax),%eax
+
+Disassembly of section .eh_frame:
+
+00000000 <.eh_frame>:
+   0:	14 00                	adc    $0x0,%al
+   2:	00 00                	add    %al,(%eax)
+   4:	00 00                	add    %al,(%eax)
+   6:	00 00                	add    %al,(%eax)
+   8:	01 7a 52             	add    %edi,0x52(%edx)
+   b:	00 01                	add    %al,(%ecx)
+   d:	7c 08                	jl     17 <.eh_frame+0x17>
+   f:	01 1b                	add    %ebx,(%ebx)
+  11:	0c 04                	or     $0x4,%al
+  13:	04 88                	add    $0x88,%al
+  15:	01 00                	add    %eax,(%eax)
+  17:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  1a:	00 00                	add    %al,(%eax)
+  1c:	1c 00                	sbb    $0x0,%al
+  1e:	00 00                	add    %al,(%eax)
+  20:	00 00                	add    %al,(%eax)
+  22:	00 00                	add    %al,(%eax)
+  24:	30 00                	xor    %al,(%eax)
+  26:	00 00                	add    %al,(%eax)
+  28:	00 41 0e             	add    %al,0xe(%ecx)
+  2b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  31:	6c                   	insb   (%dx),%es:(%edi)
+  32:	c5 0c 04             	lds    (%esp,%eax,1),%ecx
+  35:	04 00                	add    $0x0,%al
+	...

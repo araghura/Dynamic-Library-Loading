@@ -1,0 +1,28 @@
+
+myadd2:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <add1>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	83 ec 18             	sub    $0x18,%esp
+   6:	c7 04 24 00 00 00 00 	movl   $0x0,(%esp)
+   d:	e8 fc ff ff ff       	call   e <add1+0xe>
+  12:	8b 45 08             	mov    0x8(%ebp),%eax
+  15:	83 c0 01             	add    $0x1,%eax
+  18:	c9                   	leave  
+  19:	c3                   	ret    
+
+0000001a <add2>:
+  1a:	55                   	push   %ebp
+  1b:	89 e5                	mov    %esp,%ebp
+  1d:	83 ec 18             	sub    $0x18,%esp
+  20:	c7 04 24 0e 00 00 00 	movl   $0xe,(%esp)
+  27:	e8 fc ff ff ff       	call   28 <add2+0xe>
+  2c:	8b 15 00 00 00 00    	mov    0x0,%edx
+  32:	8b 45 08             	mov    0x8(%ebp),%eax
+  35:	01 d0                	add    %edx,%eax
+  37:	c9                   	leave  
+  38:	c3                   	ret    
