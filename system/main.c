@@ -25,8 +25,8 @@ process	main(void)
 		
 	//Testcases
 
-    //Testcase 1
-    //Run Helloworld program
+	//Testcase 1
+	//Run Helloworld program
 	testcase1();
 	
 	//Testcase 2
