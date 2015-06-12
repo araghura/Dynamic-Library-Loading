@@ -15,6 +15,12 @@ extern library_loader libraries[max_libraries];
 
 #define max_libraries 3
 
+void testcase1(void);
+void testcase2(int myvalue);
+void testcase3(int myvalue);
+void testcase4(void);
+void testcase5(void);
+
 process	main(void)
 {
 	/* Start the network */
@@ -31,11 +37,11 @@ process	main(void)
 	
 	//Testcase 2
 	//Load a library without global variables
-	testcase2();
+	testcase2(myvalue);
 	
 	//Testcase 3
 	//Load a library with global variables
-	testcase3();
+	testcase3(myvalue);
 
 	//Testcase 4
 	//Unload a library
@@ -92,7 +98,7 @@ void testcase2(int myvalue)
 	
 	// Find the add1 function
 	int32 (*add1)(int32) = find_library_function("add1");
-	if((int32)add1 == SYSERR) 
+	if((int32)add1 == SYSERR)) 
 	{
 		kprintf("library function add1 could not be found\n");
 		return;
@@ -156,6 +162,8 @@ void testcase4(void)
 	{
 		kprintf("Testcase 4 was successful\n");
 	}
+
+	kprintf("\n\n\n");
 }
 
 void testcase5(void)
@@ -175,4 +183,6 @@ void testcase5(void)
 		kprintf("\n\nMain process recreating shell\n\n");
 		resume(create(shell, 4096, 20, "shell", 1, CONSOLE));
 	}
+
+	kprintf("\n\n\n");
 }

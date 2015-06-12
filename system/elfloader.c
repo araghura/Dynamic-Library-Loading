@@ -1,10 +1,9 @@
-//Author: Anantha Raghuraman
-//Date: Dec 01, 2014
-//Filename: elfloader.c
-//Description:
-//This loads the elf file into memory and returns the address at which the elf file was loaded.
-//Input variable: Path to the elf file to be loaded.
-//Return: Starting address of the memory location at which the program or library was loaded.
+//Author: Anantha Raghuraman Date: Dec 01, 2014 Filename: elfloader.c
+//Description: This loads the elf file into memory and returns the address at
+//which the elf file was loaded. 
+//Input variable: Path to the elf file to be loaded. 
+//Return: Starting address of the memory location at which the program
+//or library was loaded.
 
 #include<xinu.h>
 

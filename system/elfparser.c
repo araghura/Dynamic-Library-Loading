@@ -53,7 +53,8 @@ void *elfparser(char *location, int type, char *path)
 		//FOR EACH SECTION, get the SECTION NAME FROM STRING TABLE
 		for(tab = 0;tab<100;tab ++)
 		{
-			section_names[i][tab]= (char)*(location+(uint32)string_start+tab+(uint32)(section_headers[i]->sh_name));
+			section_names[i][tab]= (char)*(location+(uint32)string_start+tab+
+				(uint32)(section_headers[i]->sh_name));
 					
 			if(section_names[i][tab] == '\0')
 			{
@@ -97,7 +98,8 @@ void *elfparser(char *location, int type, char *path)
 	count = 0;
 	for(tab =0;tab<sym_entries;tab++)
 	{
-		the_symbol_table[tab] = (Elf32_Sym *)(location + (uint32)(section_headers[sym_tab]->sh_offset) + count);
+		the_symbol_table[tab] = (Elf32_Sym *)(location + 
+			(uint32)(section_headers[sym_tab]->sh_offset) + count);
 		count = count + section_headers[sym_tab]->sh_entsize;
 	}
 	
@@ -156,7 +158,8 @@ void *elfparser(char *location, int type, char *path)
 	//FOR EACH SECTION, get the SECTION NAME FROM STRING TABLE
 		for(xinu_tab = 0;xinu_tab<100;xinu_tab ++)
 		{
-			xinu_section_names[i][xinu_tab]= (char)*(load_xinu+(uint32)xinu_string_start+(uint32)xinu_tab+(uint32)(xinu_section_headers[i]->sh_name));
+			xinu_section_names[i][xinu_tab]= (char)*(load_xinu+(uint32)xinu_string_start+(uint32)xinu_tab
+				+(uint32)(xinu_section_headers[i]->sh_name));
 				
 			if(xinu_section_names[i][xinu_tab] == '\0')
 			{
@@ -186,13 +189,15 @@ void *elfparser(char *location, int type, char *path)
 	
 	// PARSE THE SYMBOLE TABLE of XINU
 	uint32 xinu_sym_entries;
-	xinu_sym_entries = xinu_section_headers[xinu_sym_tab]->sh_size/xinu_section_headers[xinu_sym_tab]->sh_entsize;
+	xinu_sym_entries = xinu_section_headers[xinu_sym_tab]->sh_size 
+		/ xinu_section_headers[xinu_sym_tab]->sh_entsize;
 	Elf32_Sym *xinu_symbol_table[xinu_sym_entries];
 	
 	xinu_count = 0;
 	for(xinu_tab =0;xinu_tab<xinu_sym_entries;xinu_tab++)
 	{
-		xinu_symbol_table[xinu_tab] = (Elf32_Sym *)(load_xinu + xinu_section_headers[xinu_sym_tab]->sh_offset + xinu_count);
+		xinu_symbol_table[xinu_tab] = (Elf32_Sym *)(load_xinu + 
+			xinu_section_headers[xinu_sym_tab]->sh_offset + xinu_count);
 		xinu_count = xinu_count + xinu_section_headers[xinu_sym_tab]->sh_entsize;
 	}
 
@@ -249,7 +254,8 @@ void *elfparser(char *location, int type, char *path)
 				{
 					if(!strcmp(section_names[a_sym_entry->st_shndx],".bss")) //BSS section
 					{
-						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + (uint32)(reloc_entries[j]->r_offset);
+						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + 
+							(uint32)(reloc_entries[j]->r_offset);
 						value = (char *)a_sym_entry->st_value;
 						value = (uint32)value + bss_data;
 					}
@@ -265,7 +271,8 @@ void *elfparser(char *location, int type, char *path)
 						value = (char *)((uint32)value + (uint32)rel_locations);
 
 						//Find the absolute location from location
-						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + (uint32)(reloc_entries[j]->r_offset);
+						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + 
+							(uint32)(reloc_entries[j]->r_offset);
 	//					kprintf("case 1 value is %u, location to put is %x\n", (uint32)value,(uint32)locations);
 					}
 				}
@@ -277,12 +284,14 @@ void *elfparser(char *location, int type, char *path)
 					{
 
 						//rel_locations: The section where needs to have the correct value changed	
-						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + (uint32)(reloc_entries[j]->r_offset);
+						rel_locations = location + (uint32)(section_headers[text]->sh_offset) + 
+							(uint32)(reloc_entries[j]->r_offset);
 	
 						//Get the symbol name of the relocation entry in the ELF file, for which we need address resolution
 						for(tab = 0;tab<100;tab++)
 						{
-							symbolname[tab]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+tab+(uint32)(a_sym_entry->st_name));
+							symbolname[tab]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+
+								tab+(uint32)(a_sym_entry->st_name));
 						
 							if(symbolname[tab] == '\0')
 							{
@@ -296,7 +305,8 @@ void *elfparser(char *location, int type, char *path)
 						{
 							for(tab=0;tab<100;tab++)
 							{
-								xinusymbolname[tab] = (char)*(load_xinu+(uint32)(xinu_symbol_table[xinu_tab]->st_name) + (uint32)(xinu_section_headers[xinu_symstrtab]->sh_offset)+tab);
+								xinusymbolname[tab] = (char)*(load_xinu+(uint32)(xinu_symbol_table[xinu_tab]->st_name) + 
+									(uint32)(xinu_section_headers[xinu_symstrtab]->sh_offset)+tab);
 								
 								if(xinusymbolname[tab] == '\0')
 								{
@@ -365,7 +375,8 @@ void *elfparser(char *location, int type, char *path)
 			{	
 				for(j = 0;j<100;j++)
 				{
-					func_name[j]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+j+(uint32)(the_symbol_table[tab]->st_name));
+					func_name[j]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+j+
+						(uint32)(the_symbol_table[tab]->st_name));
 					if(func_name[j] == '\0')
 					{
 						break;
@@ -383,7 +394,8 @@ void *elfparser(char *location, int type, char *path)
 			}
 		}
 		// return the starting address of main
-		return (void *)(location + (uint32)section_headers[the_symbol_table[main_entry]->st_shndx]->sh_offset + the_symbol_table[main_entry]->st_value);
+		return (void *)(location + (uint32)section_headers[the_symbol_table[main_entry]->st_shndx]->sh_offset + 
+			the_symbol_table[main_entry]->st_value);
 	}
 
 	else if(type == 1) //Elfparser called by load library
@@ -433,7 +445,8 @@ void *elfparser(char *location, int type, char *path)
 				}	
 				for(j = 0;j<100;j++)
 				{
-					func_name[j]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+j+(uint32)(the_symbol_table[tab]->st_name));
+					func_name[j]= (char)*(location + (uint32)(section_headers[symstrtab]->sh_offset)+
+						j+(uint32)(the_symbol_table[tab]->st_name));
 					if(func_name[j] == '\0')
 					{
 						break;
@@ -442,7 +455,8 @@ void *elfparser(char *location, int type, char *path)
 
 				strcpy(libraries[i].function_names[libraries[i].num_functions],func_name);
 
-				libraries[i].function_ptrs[libraries[i].num_functions] = location + (uint32)section_headers[the_symbol_table[tab]->st_shndx]->sh_offset + the_symbol_table[tab]->st_value;
+				libraries[i].function_ptrs[libraries[i].num_functions] = location + 
+					(uint32)section_headers[the_symbol_table[tab]->st_shndx]->sh_offset + the_symbol_table[tab]->st_value;
 				(libraries[i].num_functions)++;
 			}
 		}
